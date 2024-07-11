@@ -32,6 +32,7 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+    console.log(card);
   };
 
   const handleAddClick = () => {
@@ -58,9 +59,7 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeather(filteredData);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   }, []);
 
   return (
@@ -79,7 +78,7 @@ function App() {
       <ModalWithForm
         buttnText="Add garment"
         title="New Garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
       >
         <label

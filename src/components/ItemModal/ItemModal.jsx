@@ -12,7 +12,7 @@ function ItemModal({ activeModal, onClose, card }) {
         <img
           className="modal__image modal__image_item_modal"
           src={card.link}
-          alt=""
+          alt={card.name}
         />
         <div className="modal__footer modal__footer_item_modal">
           <h2 className="modal__caption">{card.name}</h2>
