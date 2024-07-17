@@ -20,6 +20,12 @@
 
 .header__logo {
   margin-right: 24px;
+  cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
 }
 
 .header__date-and-location {
@@ -51,6 +57,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: color 0.5s linear 0s;
+}
+
+.header__user-container:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.header__link {
+  text-decoration: none;
+  color: #000;
 }
 
 .header_username {

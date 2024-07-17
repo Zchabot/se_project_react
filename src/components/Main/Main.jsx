@@ -1,19 +1,37 @@
+import { useContext } from "react";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import randomize from "../../assets/randomize.svg";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  clothingItems,
+  setClothingItems,
+}) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
+  const randomizeItems = () => {
+    const newClothingItems = clothingItems.slice();
+    const randomItems = newClothingItems.sort(() => Math.random() - 0.5);
+    setClothingItems(randomItems);
+  };
+
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp.F} &deg; F / You may want to wear:
+          Today is{" "}
+          {currentTemperatureUnit === "F"
+            ? weatherData.temp.F
+            : weatherData.temp.C}
+          &deg; {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
+          {clothingItems
             .filter((item) => {
               return item.weather === weatherData.type;
             })
@@ -27,7 +45,11 @@ function Main({ weatherData, handleCardClick }) {
               );
             })}
         </ul>
-        <button type="button" className="cards__randomize-button">
+        <button
+          type="button"
+          className="cards__randomize-button"
+          onClick={randomizeItems}
+        >
           <img
             src={randomize}
             alt="&#8635;"

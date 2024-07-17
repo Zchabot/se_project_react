@@ -1,0 +1,86 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../vendor/fonts/CabinetGrotesk-Bold.woff2") format("woff2");
+}
+
+.toggle__switch {
+  display: flex;
+  align-items: center;
+}
+
+.toggle__switch-label {
+  display: flex;
+  position: relative;
+  height: 28px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.toggle__switch-label-hover {
+  color: #000;
+}
+
+.toggle__switch-checkbox {
+  border-radius: 25px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  width: 56px;
+  height: 28px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.toggle__switch-checkbox-hover {
+  border-color: #000;
+}
+
+.toggle__switch-slider {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+}
+
+.toggle__switch-slider-F {
+  left: 0px;
+}
+
+.toggle__switch-slider-F-hover {
+  left: 2px;
+}
+
+.toggle__switch-slider-C {
+  left: 28px;
+}
+
+.toggle__switch-slider-C-hover {
+  left: 26px;
+}
+
+.toggle__switch-temp-F {
+  margin: 0;
+  position: absolute;
+  left: 10.115px;
+  top: 7px;
+  font-size: 14px;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+}
+
+.toggle__switch-temp-C {
+  margin: 0;
+  position: absolute;
+  left: 37.08px;
+  top: 7px;
+  font-size: 14px;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+}
+
+.toggle__switch-temp-active {
+  color: #fff;
+}
