@@ -62,6 +62,7 @@ function App() {
       .then(() => {
         setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
+        evt.target.reset();
       })
       .catch(console.error);
   };
@@ -90,7 +91,7 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems(data.reverse());
       })
       .catch(console.error);
   }, []);

@@ -8,6 +8,7 @@ function ModalWithForm({
   isOpen,
   onClose,
   onFormSubmit,
+  onFormReset,
 }) {
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -34,6 +35,7 @@ function ModalWithForm({
           className="modal__form"
           onChange={handleButtonState}
           onSubmit={onFormSubmit}
+          onReset={onFormReset}
         >
           {children}
           <button className="modal__submit" type="submit" disabled={isDisabled}>

@@ -43,6 +43,10 @@ function AddItemModal({ isOpen, onClose, onAddItem, clothingItems }) {
     });
   };
 
+  const onFormReset = () => {
+    setSelectedButton("");
+  };
+
   return (
     <ModalWithForm
       buttnText="Add garment"
@@ -50,6 +54,7 @@ function AddItemModal({ isOpen, onClose, onAddItem, clothingItems }) {
       isOpen={isOpen}
       onClose={onClose}
       onFormSubmit={onFormSubmit}
+      onFormReset={onFormReset}
     >
       <label
         htmlFor="name"
