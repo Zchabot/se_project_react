@@ -8,7 +8,7 @@
 
 .modal__content_delete-modal {
   max-width: 670px;
-  padding: 60px 151px 60px;
+  padding: 60px 150px 60px;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -42,4 +42,26 @@
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-size: 20px;
   line-height: 1.2;
+}
+
+.modal__close_delete-modal {
+  top: 22px;
+  right: 22px;
+  background-image: url(../../assets/close-grey.svg);
+}
+
+@media screen and (max-width: 750px) {
+  .modal__content_delete-modal {
+    max-width: 670px;
+    padding: 60px 60px 60px;
+    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .modal__close_delete-modal {
+    background-image: url(../../assets/close-black.svg);
+  }
 }
