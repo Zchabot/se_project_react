@@ -1,9 +1,4 @@
-const processResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-};
+import { processResponse } from "./api";
 
 export const getWeather = ({ latitude, longitude }, APIkey) => {
   return fetch(

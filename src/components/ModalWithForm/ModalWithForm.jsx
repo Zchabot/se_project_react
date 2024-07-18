@@ -1,26 +1,17 @@
-import { useState } from "react";
 import "./ModalWithForm.css";
+import { useState } from "react";
 
 function ModalWithForm({
   children,
-  buttnText,
+  buttonText,
+  loadingButtonText,
+  isLoading,
   title,
   isOpen,
   onClose,
   onFormSubmit,
-  onFormReset,
+  isValid,
 }) {
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  const handleButtonState = (evt) => {
-    const form = evt.target.form;
-    if (form.checkValidity() === true) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  };
-
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content modal__content_form-modal">
@@ -30,16 +21,10 @@ function ModalWithForm({
           type="button"
           onClick={onClose}
         />
-        <form
-          action=""
-          className="modal__form"
-          onChange={handleButtonState}
-          onSubmit={onFormSubmit}
-          onReset={onFormReset}
-        >
+        <form action="" className="modal__form" onSubmit={onFormSubmit}>
           {children}
-          <button className="modal__submit" type="submit" disabled={isDisabled}>
-            {buttnText}
+          <button className="modal__submit" type="submit" disabled={!isValid}>
+            {`${isLoading === true ? `${loadingButtonText}` : `${buttonText}`}`}
           </button>
         </form>
       </div>

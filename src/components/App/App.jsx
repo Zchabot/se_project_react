@@ -24,6 +24,8 @@ function App() {
   const [openMenu, setOpenMenu] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenMenu = () => {
     setOpenMenu(true);
@@ -56,27 +58,35 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const onAddItem = (evt, newItem) => {
-    evt.preventDefault();
+  const onAddItem = (newItem, setIsLoading) => {
+    setIsLoading(true);
     addItem(newItem)
-      .then(() => {
+      .then((res) => {
+        newItem._id = res._id;
         setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
-        evt.target.reset();
       })
-      .catch(console.error);
+      .then(setSubmitSuccess(true))
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const handleDeleteItem = (deletedItem) => {
-    const filteredItems = clothingItems.filter((item) => {
-      return item._id !== deletedItem._id;
-    });
+  const handleDeleteItem = (deletedItem, setIsLoading) => {
+    setIsLoading(true);
     deleteItem(deletedItem._id)
       .then(() => {
+        const filteredItems = clothingItems.filter((item) => {
+          return item._id !== deletedItem._id;
+        });
         setClothingItems(filteredItems);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -139,7 +149,9 @@ function App() {
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           onAddItem={onAddItem}
-          clothingItems={clothingItems}
+          submitSuccess={submitSuccess}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
         <ItemModal
           activeModal={activeModal}
@@ -152,6 +164,8 @@ function App() {
           isOpen={activeModal === "delete"}
           onClose={closeActiveModal}
           handleDeleteItem={handleDeleteItem}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
