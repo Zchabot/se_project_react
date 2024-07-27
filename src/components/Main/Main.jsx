@@ -33,6 +33,9 @@ function Main({
         <ul className="cards__list">
           {clothingItems
             .filter((item) => {
+              if (!item.weather) {
+                return;
+              }
               return item.weather === weatherData.type;
             })
             .map((item) => {

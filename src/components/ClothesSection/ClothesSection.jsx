@@ -26,10 +26,12 @@ function ClothesSection({
       <ul className="clothes-section__items">
         {clothingItems
           .filter((item) => {
-            if (item.owner._id) {
-              return item.owner._id === userData._id;
+            if (!item.owner) {
+              return;
             }
-            return item.owner === userData._id;
+            return (
+              item.owner === userData._id || item.owner._id === userData._id
+            );
           })
           .map((item) => {
             return (
