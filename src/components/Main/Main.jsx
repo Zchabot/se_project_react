@@ -3,7 +3,7 @@ import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import randomize from "../../assets/randomize.svg";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function Main({
   weatherData,

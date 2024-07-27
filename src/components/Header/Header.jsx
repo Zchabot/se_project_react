@@ -1,8 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Header({
   handleAddClick,
@@ -10,11 +11,15 @@ function Header({
   handleOpenMenu,
   handleCloseMenu,
   openMenu,
+  openLoginModal,
+  openRegisterModal,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  const { isLoggedIn, userData, hasAvatar } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -34,22 +39,53 @@ function Header({
           onClick={handleCloseMenu}
         ></button>
         <button
-          className="header__add-clothes-button"
+          className={`header__add-clothes-button ${
+            isLoggedIn === false && "header__add-clothes-button_hidden"
+          }`}
           type="button"
           onClick={handleAddClick}
         >
           + Add clothes
         </button>
         <Link to="/profile" className="header__link">
-          <div className="header__user-container">
-            <p className="header__username">Terrence Tegegne</p>
+          <div
+            className={`header__user-container ${
+              isLoggedIn === false && "header__user-container_hidden"
+            }`}
+          >
+            <p className="header__username">{userData.name}</p>
             <img
-              src={avatar}
-              alt="Terrance Tegegne"
-              className="header__avatar"
+              src={userData.avatar}
+              alt={userData.name}
+              className={`header__avatar ${
+                hasAvatar === false && "header__avatar_hidden"
+              }`}
             />
+            <div
+              className={`header__avatar-default ${
+                hasAvatar === true && "header__avatar-default_hidden"
+              }`}
+            >
+              {userData.name.slice(0, 1)}
+            </div>
           </div>
         </Link>
+        <button
+          onClick={openRegisterModal}
+          className={`header__sign-up ${
+            isLoggedIn === true && "header__sign-up_hidden"
+          }`}
+        >
+          Sign Up
+        </button>
+        <button
+          onClick={openLoginModal}
+          className={`header__log-in ${
+            isLoggedIn === true && "header__log-in_hidden"
+          }`}
+        >
+          Log In
+        </button>
       </nav>
       <button className="header__menu-button" onClick={handleOpenMenu}></button>
     </header>

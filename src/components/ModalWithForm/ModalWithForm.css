@@ -45,6 +45,11 @@
   width: 16px;
   background-color: transparent;
   cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+}
+
+.modal__close:hover {
+  opacity: 0.6;
 }
 
 .modal__close_form-modal {
@@ -75,6 +80,7 @@
   flex-direction: column;
   width: 100%;
   gap: 24px;
+  position: relative;
 }
 
 .modal__label {
@@ -143,9 +149,13 @@
   border: none;
   background-color: #000;
   color: #fff;
-  max-width: 124px;
   cursor: pointer;
   transition: opacity 0.5s linear 0s;
+  width: fit-content;
+  text-overflow: ellipsis;
+  text-overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .modal__submit:hover {
@@ -177,7 +187,7 @@
 
   .modal__submit {
     height: 44px;
-    max-width: 100%;
+    width: 100%;
     margin-top: 6px;
   }
 }

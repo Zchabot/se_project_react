@@ -66,6 +66,20 @@
   padding: 0;
   margin: 0;
   border: none;
+  cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+}
+
+.modal__delete-item-button:hover {
+  opacity: 0.6;
+}
+
+.modal__delete-item-button_visible {
+  visibility: visible;
+}
+
+.modal__delete-item-button_hidden {
+  visibility: hidden;
 }
 
 @media screen and (max-width: 750px) {

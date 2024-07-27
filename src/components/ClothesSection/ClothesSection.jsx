@@ -1,12 +1,16 @@
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
 function ClothesSection({
   onCardClick,
-  clothingItems,
   onDeleteClick,
   handleAddClick,
+  clothingItems,
 }) {
+  const { userData } = useContext(CurrentUserContext);
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -20,16 +24,23 @@ function ClothesSection({
         </button>
       </div>
       <ul className="clothes-section__items">
-        {clothingItems.map((item) => {
-          return (
-            <ItemCard
-              key={item._id}
-              item={item}
-              onCardClick={onCardClick}
-              onDeleteClick={onDeleteClick}
-            />
-          );
-        })}
+        {clothingItems
+          .filter((item) => {
+            if (item.owner._id) {
+              return item.owner._id === userData._id;
+            }
+            return item.owner === userData._id;
+          })
+          .map((item) => {
+            return (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={onCardClick}
+                onDeleteClick={onDeleteClick}
+              />
+            );
+          })}
       </ul>
     </div>
   );

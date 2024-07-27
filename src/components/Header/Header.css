@@ -44,6 +44,11 @@
   opacity: 0.6;
 }
 
+.header__add-clothes-button_hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
 .header__menu {
   display: flex;
   margin: 0 0 0 auto;
@@ -51,6 +56,7 @@
 
 .header__menu-close-button {
   visibility: hidden;
+  position: absolute;
 }
 
 .header__user-container {
@@ -63,6 +69,44 @@
 
 .header__user-container:hover {
   color: rgba(0, 0, 0, 0.6);
+}
+
+.header__user-container_hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.header__avatar {
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.header__avatar_hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.header__avatar-default {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.header__avatar-default_hidden {
+  visibility: hidden;
+  position: absolute;
 }
 
 .header__link {
@@ -96,6 +140,49 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.header__sign-up {
+  font-size: 20px;
+  line-height: 1.24;
+  color: #000;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+}
+
+.header__sign-up:hover {
+  opacity: 0.6;
+}
+
+.header__sign-up_hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.header__log-in {
+  font-family: "Cabinet Grotesk" Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.24;
+  color: #000;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+}
+
+.header__log-in:hover {
+  opacity: 0.6;
+}
+
+.header__log-in_hidden {
+  visibility: hidden;
+  position: absolute;
 }
 
 @media screen and (max-width: 750px) {
@@ -137,7 +224,6 @@
 
   .header__menu-close-button {
     visibility: visible;
-    position: absolute;
     top: 11px;
     right: 11px;
     background-position: center;

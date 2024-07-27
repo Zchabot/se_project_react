@@ -3,7 +3,7 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1200px) {
   .profile {
     flex-direction: column;
     background-color: #f3f3f3;
