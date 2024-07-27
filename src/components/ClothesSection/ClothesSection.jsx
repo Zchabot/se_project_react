@@ -26,9 +26,6 @@ function ClothesSection({
       <ul className="clothes-section__items">
         {clothingItems
           .filter((item) => {
-            if (!item.owner) {
-              return;
-            }
             return (
               item.owner === userData._id || item.owner._id === userData._id
             );
