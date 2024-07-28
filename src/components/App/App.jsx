@@ -104,6 +104,7 @@ function App() {
     setIsLoading(true);
     addItem(newItem, token)
       .then((res) => {
+        res.owner = userData;
         setClothingItems([res, ...clothingItems]);
         closeActiveModal();
       })
@@ -195,8 +196,10 @@ function App() {
     const oldItem = clothingItems.findIndex((item) => {
       return item._id === cardId;
     });
+    const item = newItem.data ? newItem.data : newItem;
     let newClothingItems = clothingItems;
-    newClothingItems[oldItem] = newItem.data;
+    item.owner = newClothingItems[oldItem].owner;
+    newClothingItems[oldItem] = item;
     setClothingItems(newClothingItems);
   };
 
