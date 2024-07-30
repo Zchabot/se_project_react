@@ -20,12 +20,13 @@ const ToggleSwitch = () => {
   return (
     <div className="toggle__switch">
       <label
-        htmlFor="switch"
+        htmlFor="temp-unit-switch"
         className={`toggle__switch-label ${
           hover === "hover" && "toggle__switch-label-hover"
         }`}
       >
         <input
+          id="temp-unit-switch"
           type="checkbox"
           className={`toggle__switch-checkbox ${
             hover === "hover" && "toggle__switch-checkbox-hover"
@@ -44,7 +45,6 @@ const ToggleSwitch = () => {
                   hover === "hover" && "toggle__switch-slider-C-hover"
                 }`
           }`}
-          onClick={handleToggleSwitchChange}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         ></span>
@@ -52,7 +52,6 @@ const ToggleSwitch = () => {
           className={`toggle__switch-temp-F ${
             currentTemperatureUnit === "F" && "toggle__switch-temp-active"
           }`}
-          onClick={handleToggleSwitchChange}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -62,7 +61,6 @@ const ToggleSwitch = () => {
           className={`toggle__switch-temp-C ${
             currentTemperatureUnit === "C" && "toggle__switch-temp-active"
           }`}
-          onClick={handleToggleSwitchChange}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

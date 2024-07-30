@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../utils/hooks/useFormAndValidation";
+import Input from "../Input/Input";
 import "./LoginModal.css";
 
 function LoginModal({
@@ -9,35 +10,22 @@ function LoginModal({
   onClose,
   submitSuccess,
   isLoading,
-  setIsLoading,
   handleLogin,
   handleSignupButton,
 }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleInputChange = (evt) => {
-    handleChange(evt);
-    const { name, value } = evt.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    handleLogin(data, setIsLoading);
+    handleLogin({ email: values.email, password: values.password });
+  };
 
+  useEffect(() => {
     if (submitSuccess === true) {
       resetForm();
     }
-  };
+  }, [submitSuccess]);
 
   return (
     <ModalWithForm
@@ -50,38 +38,28 @@ function LoginModal({
       onFormSubmit={onFormSubmit}
       isValid={isValid}
     >
-      <label
-        htmlFor="email"
-        className={`modal__label ${errors.email && "modal__label_error"}`}
-      >
-        {`Email*${errors.email ? ` (${errors.email})` : ""}`}
-        <input
-          type="email"
-          className={`modal__input ${errors.email && "modal__input_error"}`}
-          id="email"
-          placeholder="Email"
-          value={`${values.email ? `${values.email}` : ""}`}
-          name="email"
-          onChange={handleInputChange}
-          required
-        />
-      </label>
-      <label
-        htmlFor="password"
-        className={`modal__label ${errors.password && "modal__label_error"}`}
-      >
-        {`Password*${errors.password ? ` (${errors.password})` : ""}`}
-        <input
-          type="text"
-          className={`modal__input ${errors.password && "modal__input_error"}`}
-          id="password"
-          placeholder="Password"
-          value={`${values.password ? `${values.password}` : ""}`}
-          name="password"
-          onChange={handleInputChange}
-          required
-        />
-      </label>
+      <Input
+        id="login-email"
+        errors={errors.email}
+        labelText="Email*"
+        preErrorMsgTxt=" "
+        inputName="email"
+        type="email"
+        placeholder="Email"
+        values={values.email}
+        handleChange={handleChange}
+      />
+      <Input
+        id="login-password"
+        errors={errors.password}
+        labelText="Password*"
+        preErrorMsgTxt=" "
+        inputName="password"
+        type="text"
+        placeholder="Password"
+        values={values.password}
+        handleChange={handleChange}
+      />
       <button
         onClick={handleSignupButton}
         className={`${

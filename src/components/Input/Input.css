@@ -1,0 +1,22 @@
+.input__label {
+  margin: 0;
+  padding: 0;
+}
+
+.input__label_error {
+  color: #ff4d00;
+}
+
+.input__element {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: solid 1px #000;
+  margin: 8px 0 0;
+  padding: 0 0 4px;
+}
+
+.input__element_error {
+  color: #ff4d00;
+  border-color: #ff4d00;
+}

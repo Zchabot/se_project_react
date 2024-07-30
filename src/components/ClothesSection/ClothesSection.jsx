@@ -26,7 +26,10 @@ function ClothesSection({
       <ul className="clothes-section__items">
         {clothingItems
           .filter((item) => {
-            return JSON.stringify(item.owner) === JSON.stringify(userData);
+            if (item.owner && typeof item.owner !== "string") {
+              return item.owner._id === userData._id;
+            }
+            return item.owner === userData._id;
           })
           .map((item) => {
             return (

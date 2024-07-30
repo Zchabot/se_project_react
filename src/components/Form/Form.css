@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../vendor/fonts/CabinetGrotesk-Bold.woff2") format("woff2");
+}
+
+.form__title {
+  margin: 0 0 24px;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.form__element {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  position: relative;
+}
+
+.form__submit {
+  margin: 8px 0 0;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.25;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.5s linear 0s;
+  width: fit-content;
+  text-overflow: ellipsis;
+  text-overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.form__submit:hover {
+  opacity: 0.6;
+}
+
+.form__submit:disabled {
+  opacity: 0.3;
+}
+
+@media screen and (max-width: 750px) {
+  .form__title {
+    font-size: 20px;
+    margin-bottom: 37px;
+  }
+
+  .form__submit {
+    height: 44px;
+    width: 100%;
+    margin-top: 6px;
+  }
+}

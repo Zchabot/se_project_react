@@ -1,3 +1,5 @@
+import { Modal } from "../Modal/Modal";
+import Form from "../Form/Form";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -12,22 +14,22 @@ function ModalWithForm({
   isValid,
 }) {
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
-      <div className="modal__content modal__content_form-modal">
-        <h2 className="modal__title">{title}</h2>
-        <button
-          className="modal__close modal__close_form-modal"
-          type="button"
-          onClick={onClose}
-        />
-        <form action="" className="modal__form" onSubmit={onFormSubmit}>
-          {children}
-          <button className="modal__submit" type="submit" disabled={!isValid}>
-            {`${isLoading === true ? `${loadingButtonText}` : `${buttonText}`}`}
-          </button>
-        </form>
-      </div>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      containerClass="modal__content_type_form-modal"
+      closeClass="modal__close_form-modal"
+    >
+      <Form
+        title={title}
+        onFormSubmit={onFormSubmit}
+        isValid={isValid}
+        isLoading={isLoading}
+        loadingButtonText={loadingButtonText}
+        buttonText={buttonText}
+        children={children}
+      />
+    </Modal>
   );
 }
 

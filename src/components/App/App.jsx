@@ -62,19 +62,24 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
-    if (card.owner._id) {
+    if (card.owner && typeof card.owner !== "string") {
       setCardOwner(card.owner._id);
     } else {
       setCardOwner(card.owner);
     }
   };
 
+  const handleOpenFormModal = (modal) => {
+    setActiveModal(modal);
+    setSubmitSuccess(false);
+  };
+
   const handleDeleteClick = () => {
-    setActiveModal("delete");
+    handleOpenFormModal("delete");
   };
 
   const handleAddClick = () => {
-    setActiveModal("add-garment");
+    handleOpenFormModal("add-garment");
     handleCloseMenu();
   };
 
@@ -83,88 +88,83 @@ function App() {
   };
 
   const openLoginModal = () => {
-    setActiveModal("log-in");
+    handleOpenFormModal("log-in");
   };
 
   const openRegisterModal = () => {
-    setActiveModal("register");
+    handleOpenFormModal("register");
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(() => {
+        closeActiveModal();
+        setSubmitSuccess(true);
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const onAddItem = (newItem, setIsLoading) => {
+  const onAddItem = (newItem) => {
     const token = getToken();
-    setIsLoading(true);
-    addItem(newItem, token)
-      .then((res) => {
-        res.owner = userData;
+    const makeRequest = () => {
+      return addItem(newItem, token).then((res) => {
         setClothingItems([res, ...clothingItems]);
-        closeActiveModal();
-      })
-      .then(setSubmitSuccess(true))
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
   };
 
-  const handleDeleteItem = (deletedItem, setIsLoading) => {
+  const handleDeleteItem = (deletedItem) => {
     const token = getToken();
-    setIsLoading(true);
-    deleteItem(deletedItem._id, token)
-      .then(() => {
+    const makeRequest = () => {
+      return deleteItem(deletedItem._id, token).then(() => {
         const filteredItems = clothingItems.filter((item) => {
           return item._id !== deletedItem._id;
         });
         setClothingItems(filteredItems);
-        closeActiveModal();
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
   };
 
-  const handleRegistration = (data) => {
-    auth
-      .register(data)
-      .then(() => {
-        setActiveModal("log-in");
-      })
-      .catch(console.error);
-  };
-
-  const handleLogin = (data) => {
+  const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
     }
-    setIsLoading(true);
-    auth
-      .authorize(data)
-      .then((res) => {
+    const makeRequest = () => {
+      return auth.authorize({ email, password }).then((res) => {
         if (res.token) {
           setToken(res.token);
           setIsLoggedIn(true);
-          closeActiveModal();
           getUserInfo(res.token).then((data) => {
             setUserData(data);
           });
           const redirectPath = location.state?.from?.pathname || "/";
           navigate(redirectPath);
         }
-      })
-      .then(setSubmitSuccess(true))
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
+  };
+
+  const handleRegistration = (data) => {
+    const makeRequest = () => {
+      return auth.register(data).then(() => {
+        handleLogin({ email: data.email, password: data.password });
+      });
+    };
+    handleSubmit(makeRequest);
   };
 
   const handleLogOut = () => {
@@ -179,17 +179,12 @@ function App() {
 
   const handleProfileUpdate = (data) => {
     const token = getToken();
-    setIsLoading(true);
-    updateUserInfo(data, token)
-      .then((res) => {
+    const makeRequest = () => {
+      return updateUserInfo(data, token).then((res) => {
         setUserData(res.data);
-        closeActiveModal();
-      })
-      .then(setSubmitSuccess(true))
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
   };
 
   const replaceLikedItem = (newItem, cardId) => {
@@ -198,7 +193,6 @@ function App() {
     });
     const item = newItem.data ? newItem.data : newItem;
     let newClothingItems = clothingItems;
-    item.owner = newClothingItems[oldItem].owner;
     newClothingItems[oldItem] = item;
     setClothingItems(newClothingItems);
   };
@@ -217,12 +211,7 @@ function App() {
             setIsLiked(false);
             replaceLikedItem(newItem, cardId);
           })
-          .then(() => {
-            getItems().then((res) => {
-              setClothingItems(res.reverse());
-            });
-          })
-          .catch((err) => console.log(err));
+          .catch(console.error);
   };
 
   const handleLoginButton = () => {
@@ -241,8 +230,8 @@ function App() {
     }
     getUserInfo(jwt)
       .then((data) => {
-        setIsLoggedIn(true);
         setUserData(data);
+        setIsLoggedIn(true);
       })
       .catch(console.error);
   }, []);
@@ -337,7 +326,7 @@ function App() {
             setIsLoading={setIsLoading}
           />
           <ItemModal
-            activeModal={activeModal}
+            isOpen={activeModal === "preview"}
             onClose={closeActiveModal}
             card={selectedCard}
             handleDeleteClick={handleDeleteClick}

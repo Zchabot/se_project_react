@@ -33,7 +33,7 @@ function ItemCard({ item, onCardClick }) {
     } else {
       setIsLiked(false);
     }
-  }, []);
+  }, [userData]);
 
   return (
     <li className="card">

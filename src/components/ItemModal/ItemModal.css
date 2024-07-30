@@ -6,7 +6,7 @@
   src: url("../../vendor/fonts/CabinetGrotesk-Bold.woff2") format("woff2");
 }
 
-.modal__content_item_modal {
+.modal__content_type_item_modal {
   max-width: 498px;
   width: 100%;
   padding: 0;
