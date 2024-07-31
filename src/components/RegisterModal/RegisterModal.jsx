@@ -18,12 +18,7 @@ function RegisterModal({
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    handleRegistration({
-      email: values.email,
-      password: values.password,
-      name: values.name,
-      avatar: values.avatar,
-    });
+    handleRegistration(values);
   };
 
   useEffect(() => {

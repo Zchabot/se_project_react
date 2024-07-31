@@ -18,7 +18,7 @@ function LoginModal({
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    handleLogin({ email: values.email, password: values.password });
+    handleLogin(values);
   };
 
   useEffect(() => {

@@ -16,11 +16,7 @@ function AddItemModal({
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    onAddItem({
-      name: values.name,
-      imageUrl: values.url,
-      weather: values.radio,
-    });
+    onAddItem(values);
   };
 
   useEffect(() => {
@@ -55,38 +51,38 @@ function AddItemModal({
       />
       <Input
         id="add-item-imageUrl"
-        errors={errors.url}
+        errors={errors.imageUrl}
         labelText="Image"
         preErrorMsgTxt="* "
-        inputName="url"
+        inputName="imageUrl"
         type="url"
         placeholder="Image"
-        values={values.url}
+        values={values.imageUrl}
         handleChange={handleChange}
       />
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
         <RadioInput
           id="add-item-hot"
-          inputName="radio"
+          inputName="weather"
           value="hot"
-          valuesName={values.radio}
+          valuesName={values.weather}
           handleChange={handleChange}
           text="Hot"
         />
         <RadioInput
           id="add-item-warm"
-          inputName="radio"
+          inputName="weather"
           value="warm"
-          valuesName={values.radio}
+          valuesName={values.weather}
           handleChange={handleChange}
           text="Warm"
         />
         <RadioInput
           id="add-item-cold"
-          inputName="radio"
+          inputName="weather"
           value="cold"
-          valuesName={values.radio}
+          valuesName={values.weather}
           handleChange={handleChange}
           text="Cold"
         />

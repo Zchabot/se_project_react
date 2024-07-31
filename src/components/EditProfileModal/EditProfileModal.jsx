@@ -5,13 +5,7 @@ import { useFormAndValidation } from "../../utils/hooks/useFormAndValidation";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Input from "../Input/Input";
 
-function EditProfileModal({
-  isOpen,
-  onClose,
-  submitSuccess,
-  isLoading,
-  handleProfileUpdate,
-}) {
+function EditProfileModal({ isOpen, onClose, isLoading, handleProfileUpdate }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
@@ -20,15 +14,10 @@ function EditProfileModal({
   const onFormSubmit = (evt) => {
     evt.preventDefault();
     handleProfileUpdate({ name: values.name, Avatar: values.avatar });
-
-    if (submitSuccess === true) {
-      resetForm();
-    }
   };
 
   useEffect(() => {
-    values.name = userData.name;
-    values.avatar = userData.avatar;
+    resetForm(userData);
   }, [isOpen, userData]);
 
   return (

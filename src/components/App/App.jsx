@@ -361,7 +361,6 @@ function App() {
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
-            submitSuccess={submitSuccess}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             handleProfileUpdate={handleProfileUpdate}
