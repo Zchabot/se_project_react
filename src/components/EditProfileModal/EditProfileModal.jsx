@@ -13,7 +13,7 @@ function EditProfileModal({ isOpen, onClose, isLoading, handleProfileUpdate }) {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    handleProfileUpdate({ name: values.name, Avatar: values.avatar });
+    handleProfileUpdate({ name: values.name, avatar: values.avatar });
   };
 
   useEffect(() => {
