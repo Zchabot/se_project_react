@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://wtwrzc.port0.org",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && zacharychabot@Zacharys-MBP se_project_react % scp -r ./dist/* zacharychabot95@wtwrzc.port0.org:/home/zacharychabot95/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",

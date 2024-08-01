@@ -1,9 +1,13 @@
 import { request } from "./api";
+import { baseUrl } from "./constants";
 
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrzc.port0.org"
+    : "http://localhost:3001";
 
 export const register = (data) => {
-  return request(`${BASE_URL}/signup`, {
+  return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +17,7 @@ export const register = (data) => {
 };
 
 export const authorize = (data) => {
-  return request(`${BASE_URL}/signin`, {
+  return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

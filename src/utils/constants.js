@@ -76,3 +76,8 @@ export const defaultWeatherOptions = {
     url: new URL("../assets/night/night-default.png", import.meta.url).href,
   },
 };
+
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrzc.port0.org"
+    : "http://localhost:3001";
