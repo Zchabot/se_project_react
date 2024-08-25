@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "npm run build && zacharychabot@Zacharys-MBP se_project_react % scp -r ./dist/* zacharychabot95@wtwrzc.port0.org:/home/zacharychabot95/frontend"
+    "deploy": "npm run build && scp -r ./dist/* zacharychabot95@wtwrzc.port0.org:/home/zacharychabot95/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
