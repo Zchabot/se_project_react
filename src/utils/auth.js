@@ -1,11 +1,6 @@
 import { request } from "./api";
 import { baseUrl } from "./constants";
 
-export const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.wtwrzc.port0.org"
-    : "http://localhost:3001";
-
 export const register = (data) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
