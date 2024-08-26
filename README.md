@@ -22,3 +22,19 @@ Users will stay logged in for 7 days, or until they sign out.
 ## Backend
 
 https://wtwrzc.port0.org
+
+### Images
+
+![alt text](./src/assets/demo/home-logged-in.png)
+![alt text](./src/assets/demo/home-logged-out.png)
+![alt text](./src/assets/demo/modal-1.png)
+![alt text](./src/assets/demo/modal-2.png)
+![alt text](./src/assets/demo/modal-3.png)
+![alt text](./src/assets/demo/modal-4.png)
+![alt text](./src/assets/demo/modal-5.png)
+![alt text](./src/assets/demo/modal-6.png)
+![alt text](./src/assets/demo/modal-7.png)
+![alt text](./src/assets/demo/profile-page.png)
+![alt text](./src/assets/demo/temp-unit-switch.png)
+![alt text](./src/assets/demo/temp-f.png)
+![alt text](./src/assets/demo/temp-c.png)
